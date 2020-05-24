@@ -1,6 +1,3 @@
-//Accepted
-//Memory Usage: 42.3 MB Runtime: 240 ms
-
 object optionProblem {
   def main(args: Array[String]): Unit = {
     println(optionQuestion1(Some(2)))
