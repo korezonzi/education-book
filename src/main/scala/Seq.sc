@@ -66,3 +66,32 @@ Nil
 Seq.empty
 numSeq ++ Nil
 
+val xs = List(1,2,3,4,5)
+var sum = 0
+for(x <- xs) {
+  sum = sum + x
+  //sum += x
+}
+sum
+
+xs.foldLeft(0){(sum, x) =>
+  sum + x
+}
+sum
+
+xs.foldLeft(0: Int){(acc: Int, n: Int) =>
+  println(acc)
+  println(n)
+  println( acc - n)
+  acc - n
+}
+xs.foldLeft(0)((z, n) => z - n)
+
+xs.foldRight(0)((acc, n) => acc +n)
+xs.foldRight(0)((acc, n) => acc - n)
+xs.reduce((acc, n) => acc+n)
+xs.min
+xs.max
+Seq.empty match {
+  case Nil => 0
+}
