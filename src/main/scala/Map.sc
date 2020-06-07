@@ -22,3 +22,20 @@ nameMap
 val userTupleSeq = Seq((1, "鈴木"), (2, "田中"), (3, "高橋"))
 userTupleSeq.toMap
 userTupleSeq.groupBy(_._1)
+
+val numbers = Seq(1,2,3,4,5).zipWithIndex.toMap
+//numbers.map(_._1 % 2 == 0)
+numbers.map({
+  x => if(x._1 % 2 == 0) Map(1 -> x)
+  else Map(0 -> x)
+})
+
+val nn = Seq(1,2,3,4,5)
+val resMap = nn.map(x => x match {
+  case even if(x % 2 == 0) => Map(1 -> x)
+  case y => Map(0 -> y)
+})
+
+val evenSeq = nn.filter(_ % 2  == 0)
+val addSeq = nn.filter(_ % 2 != 0)
+val resMaps = Seq(1,2,3,4,5).groupBy(_ % 2 ==0)
