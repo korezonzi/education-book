@@ -23,3 +23,13 @@ v.getOrElse("not found")
 
 //--------Try---------//
 Try(None.get)
+
+  val eit1: Either[String, Int] = Right(200)
+  val eit2: Either[String, Int] = Left("not found")
+  val eit3: Either[String, Int] = Right(100)
+  val v = for {
+    val1 <- eit1
+    val2 <- eit2
+    val3 <- eit3
+  } yield val1 * val2 * val3
+    v.foreach(i => println(i))
