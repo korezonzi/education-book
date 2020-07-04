@@ -46,5 +46,26 @@ def question4(nums: Seq[Int]) = {
   nums.sortWith((num, numNext) => num > numNext)
 }
 
+//Q5
 //Seq[Option[Int]]型である、numOpsを引数にとりnumOpsの要素がSomeの場合は中の数字を、Noneの場合はリストから外したSeq[Int]を返すquestion5を作成してください
-//Seq(Some(3), Some(5), None).map()
+val numsOpt = Seq(Some(3), Some(5), None)
+numsOpt.flatten
+for{
+  Some(x) <- numsOpt
+}yield x
+
+//6
+val nums = Seq(2,5,1,5)
+nums.zipWithIndex
+
+//7
+nums.zipWithIndex.max
+nums.indexOf(nums.max)
+
+//8
+nums.distinct
+
+//9
+//case class Article(
+//  id:
+//)
