@@ -27,6 +27,9 @@ intVal.flatMap(x =>
     None
   }
 )
+optNone.flatten
+optitonNum.flatMap(x => x.map(_*2))
+optitonNum.flatMap(_.map(_ * 2))
 
 val result: Option[(String, String, String)] = Some("aa", "vv", "uu")
 result.map(x => x)
@@ -34,7 +37,3 @@ result.map(x => (x._1, x._2, x._3))
 //例題の説明
 //org : Organizationが使用されていない & 3つを返すために.map
 //そのままだと、faの値が返されるため
-
-val res = for {
-
-}
