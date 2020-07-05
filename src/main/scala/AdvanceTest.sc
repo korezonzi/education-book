@@ -1,27 +1,6 @@
-//Q1
-//Option[Int]型の numOptを引数として受け取り
-//numOptがSomeでかつ値が10以上であれば、"A"
-//numOptがSomeでかつ値が9以下、5以上であれば、"B"
-//numOptがSomeでかつ値が4以下であれば"C"
-//numOptがNoneであれば"D"
-//を標準出力させるメソッドquestion1を作成してください
+import scala.concurrent.Future
+import scala.util.{Failure, Success}
 
-def question1(numOpt: Option[Int]) = {
-  numOpt match {
-    case Some(x) if(x >= 10)           => "A"
-    case Some(y) if(y >= 5 && y <= 9 ) => "B"
-    case Some(z) if(z <= 4)            => "C"
-    case None                          => "D"
-  }
-}
-println(question1(Some(8)))
-
-//Q2
-//Option[Int] => String に変換する関数 convと、Option[Int]型である numOpt を引数にとり、numOptを文字列にして返すメソッドconvertToStringがあります。convertToStringを使ってnumOpt: Option[Int]をStringに変換するメソッドquestion2を作成してください。
-//numOptは以下の条件に従って変換させること
-//     1.numOptがSome()であれば、そのIntの値をStringに変換する
-//     2.numOptがNoneであれば、"空でした"というStringに変換する
-//
 //def convertToString(numOpt: Option[Int])(conv: Option[Int] => String): String = conv(numOpt)
 //def question2(numOpt: Option[Int]): String = {
 //  numOpt match {
@@ -66,6 +45,103 @@ nums.indexOf(nums.max)
 nums.distinct
 
 //9
-//case class Article(
-//  id:
-//)
+case class Article(
+  id:    Long,
+  title: String,
+  body:  String
+)
+case class ArticleDetail(
+  articleId: Long,
+  category:  String
+)
+val articles: Seq[Article] =
+  Seq(
+    Article(1, "フロント", "html, cssの修正"),
+    Article(2, "バック", "Scalaだよ"),
+    Article(3, "インフラ", "AWS")
+  )
+val articlesDetail: Seq[ArticleDetail] =
+  Seq(
+    ArticleDetail(1, "done"),
+    ArticleDetail(2, "done"),
+  )
+//for{
+//  arti     <- articles
+//  arDetal <- articlesDetail
+//  x <- if(arDetal.articleId == arti.id) arti
+//  y <- if(arDetal.articleId == arti.id) arDetal
+//} yield (x,y)
+
+for{
+  at <- articles
+  ad <- articlesDetail
+} yield (at, ad)
+
+articles.map(x => (x, articlesDetail.find(_.articleId == x.id)))
+//Map(1 -> AD(1,done), ...)
+val articleDetailMap = articlesDetail.map(x => (x.articleId, x)).toMap
+//
+articles.map(x => (x, articleDetailMap.get(x.id)))
+
+//10
+val set1 = Set(1,2,2,3)
+val set2 = Set(3,5,8)
+set1.union(set2)
+set1.diff(set2)
+
+case class Person(
+  id: Long,
+  name: String,
+  gender: Option[String]
+)
+
+val people = Seq(
+  Person(1, "太郎", Some("male")),
+  Person(2, "Rin", Some("female")),
+  Person(3, "Pochi", None)
+)
+people.map(x => Person(x.id, x.name, None))
+people.map(_.copy(gender = None))
+
+//12
+val numStr = "1,2,3,hello,4"
+val numStrSeq =  numStr.split(",").map(_.toIntOption)
+
+/*.collect{
+  case x if()
+
+/* => Some(x)
+  case _       => None
+}*/*/
+
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.{Await, Future}
+//val fOptStr: Future[Option[String]] = Future(Some("ほげ"))
+val fOptStr: Future[Option[String]] = Future(None)
+fOptStr.onComplete{
+  case Success(value) => value match {
+    case Some(x) => println(s"Someの時は: ${x}")
+    case None    => println("なし")
+  }
+  case Failure(exception) => println("失敗")
+}
+for{
+  optStr <- fOptStr
+}yield optStr match {
+  case Some(x) => println(x)
+  case None    => println("なし")
+}
+
+//14
+val fEith: Future[Either[Int, String]] = Future(Right("成功"))
+val fEithL: Future[Either[Int, String]] =Future(Left(11))
+for{
+  eith <- fEith
+} yield {
+  eith match {
+    case Right(x) => println(x)
+    case Left(x)  => println(x)
+  }
+}
+
+//15
