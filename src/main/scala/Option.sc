@@ -37,3 +37,17 @@ result.map(x => (x._1, x._2, x._3))
 //例題の説明
 //org : Organizationが使用されていない & 3つを返すために.map
 //そのままだと、faの値が返されるため
+
+val optnumSome: Option[Option[Int]] = Some(Some(2))
+val optNumNone: Option[Option[Int]] = Some(None)
+optnumSome.flatMap { x =>
+  x.map(_ * 2)
+}
+
+optnumSome.flatMap(_.map(_ * 2 ))
+optNumNone.flatMap(_.map(_ * 2))
+
+optNumNone match {
+  case Some(x) => x
+  case None    => None
+}
