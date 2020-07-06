@@ -153,4 +153,14 @@ for{
   }
 }
 
+//ばつ
 //15
+val numsFutu: Seq[Future[Int]] = Seq(Future(1), Future(2), Future(5))
+numsFutu.foldLeft(Future.successful(0)) {(acc, v) =>
+  for {
+    v1 <- acc
+    v2 <- v
+  }yield {
+    (v1+v2)
+  }
+}

@@ -26,6 +26,7 @@ object AdvanceProblem {
     question13_2(fNoneStr)
     question14(fEithR)
     question14(fEithL)
+    question15(numsFuture)
   }
   val nums    = Seq(3, 5, 1, 0)
   val numsOpt = Seq(Some(3), Some(1), None, Some(10))
@@ -50,6 +51,7 @@ object AdvanceProblem {
   val fNoneStr = Future(None)
   val fEithR  = Future(Right("成功"))
   val fEithL  = Future(Left(199))
+  val numsFuture: Seq[Future[Int]] = Seq(Future(1), Future(2), Future(5))
 
   //Q1
   //Option[Int]型の numOptを引数として受け取り
@@ -194,6 +196,20 @@ object AdvanceProblem {
         case Left(x)  => println(x)
       }
     }
+  }
+
+  //ばつ
+  //15
+  def question15(numsFuture: Seq[Future[Int]]) = {
+    val res = numsFuture.foldLeft(Future.successful(0)) {(acc, n) =>
+      for {
+        v1 <- acc
+        v2 <- n
+      }yield  {
+        (v1+v2)
+      }
+    }
+    println(res)
   }
 
 }
