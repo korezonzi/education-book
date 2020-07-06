@@ -44,6 +44,8 @@ numSeq.collectFirst{
   case y if(y % 2 == 1) => "odd"
 }
 
+//exists: ある条件があるか
+//contains: 要素があるか
 numSeq.exists(_ %  2 == 1 )
 numSeq.contains(1)
 numSeq.contains(4)
