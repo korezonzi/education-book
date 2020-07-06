@@ -9,6 +9,9 @@ object optionProblem {
     println(opt04_2(optNumSome))
     println(opt04_2(optNumNone))
     println(opt04_2(None))
+    println(opt04_3(optNumSome))
+    println(opt04_3(optNumNone))
+    println(opt04_3(None))
   }
 
   val optNumSome = Some(Some(2))
@@ -42,4 +45,9 @@ object optionProblem {
   def opt04_2(num: Option[Option[Int]])= {
     num.flatMap(_.map(_ * 2))
   }
+
+  def opt04_3(num: Option[Option[Int]]) = {
+    num.flatten.map(_ * 2)
+  }
+  //Some(None): flattenでNoneになる
 }
