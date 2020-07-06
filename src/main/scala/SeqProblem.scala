@@ -1,29 +1,36 @@
 object SeqProblem {
   def main(args: Array[String]): Unit = {
-    println(prob1(Seq(1,2,3,4,5, 6)))
-    println(prob2(Seq(1,2,3,4,5, 6)))
-    println(prob3(Seq(Seq(2,3,5),Seq(1,2), Seq(1,3))))
-    println(prob4(Seq(1,2,3)))
+    println(prob1(numSeq))
+    println(prob1_2(numSeq))
+    println(prob1Part2(numSeq))
+    println(prob2(numSeq))
+    println(prob3(Seq(numSeq,numSeq2, numSeq3)))
+    println(prob4(numSeq))
     println(prob4(Seq(1,3)))
     println(prob5(Seq(Some(1), Some(0))))
     println(prob5(Seq(Some(1), None)))
     println("------prob6-------")
     println(prob6(Seq("opton", "a", "hoge")))
-    println(prob7(Seq(2, 101, 4, 2000)))
-    println(prob7(Seq(2, 11, 4)))
-    println(prob8(Seq(2, 11, 4)))
-    println(prob9(Seq(2, 11, 4)))
-    println(prob10(Seq(2, 11, 4)))
+    println(prob7(numSeq))
+    println(prob7(numSeq4))
+    println(prob8(numSeq))
+    println(prob9(numSeq))
+    println(prob10(numSeq4))
     println("-----prob11-----")
-    println(prob11(Seq(1, 2, 3, 4, 5)))
-    println("12: "+prob12(Seq(1, 2, 3, 4, 5)))
+    println(prob11(numSeq))
+    println("12: "+prob12(numSeq))
     //println("13: "+prob13(Seq.empty))
     println("14: "+prob14)
     println("15: "+prob15)
 
   }
 
-  //Seq[Int]型である、numSeqが引数として渡されるseqQuestion1メソッドがあります。numSeqの要素のうち、3の倍数の要素のみ0に変換する関数を実装してください。Seq[Int]型である、numSeqが引数として渡されるseqQuestion1メソッドがあります。numSeqの要素のうち、3の倍数の要素のみ0に変換する関数を実装してください。
+  val numSeq  = Seq(1, 2, 3, 4, 5)
+  val numSeq2 = Seq(2, 5)
+  val numSeq3 = Seq(1, 8)
+  val numSeq4 = Seq(2, 11, 4)
+
+  //Seq[Int]型である、numSeqが引数として渡されるseqQuestion1メソッドがあります。numSeqの要素のうち、3の倍数の要素のみ0に変換する関数を実装してください。
   def prob1(numSeq: Seq[Int]) = {
     for{
       x <- numSeq
@@ -33,22 +40,27 @@ object SeqProblem {
     }
   }
 
-  //Seq[Int]型である、numSeqが引数として渡されるseqQuestion2メソッドがあります。 numSeqのうち3の倍数のみを返すメソッドをfilterを使って作成してください。Seq[Int]型である、numSeqが引数として渡されるseqQuestion2メソッドがあります。 numSeqのうち3の倍数のみを返すメソッドをfilterを使って作成してください。
+  def prob1_2(numSeq: Seq[Int]) = {
+    numSeq.collect{
+      case num if(num  %3 == 0) => 0
+      case other                => other
+    }
+  }
   def prob1Part2(numSeq: Seq[Int]) = {
     numSeq.map(x =>  if( x % 3 == 0) 0 else x)
   }
 
+  //Seq[Int]型である、numSeqが引数として渡されるseqQuestion2メソッドがあります。 numSeqのうち3の倍数のみを返すメソッドをfilterを使って作成してください。
   def prob2(numSeq: Seq[Int]) = {
     numSeq.filter(_ % 3 == 0)
   }
 
   //Seq[Seq[Int]]型である、numSeqSeqが引数として渡されるseqQuestion3メソッドがあります。 numSeqSeqのうち3の倍数を含むSeqのみを返すメソッドをfilterとexistsを使って作成してください。
   def prob3(numSeqSeq: Seq[Seq[Int]]) = {
-    //val aSSeq = Seq(Seq(1,2,3), Seq(2), Seq(333))
     numSeqSeq.filter(_.exists(_ % 3 == 0))
   }
 
-  //Seq[Int]型である、numSeqが引数として渡されるseqQuestion4メソッドがあります。 numSeqに偶数が含まれていればその最初の値を、含まれていない場合は-1を返すメソッドをfindを使って作成してください。Seq[Int]型である、numSeqが引数として渡されるseqQuestion4メソッドがあります。 numSeqに偶数が含まれていればその最初の値を、含まれていない場合は-1を返すメソッドをfindを使って作成してください。
+  //Seq[Int]型である、numSeqが引数として渡されるseqQuestion4メソッドがあります。 numSeqに偶数が含まれていればその最初の値を、含まれていない場合は-1を返すメソッドをfindを使って作成してください。
   def prob4(numSeq: Seq[Int]) = {
     numSeq.find(_ % 2 == 0) match {
       case Some(x) => x
@@ -65,7 +77,7 @@ object SeqProblem {
     numOptSeq.find(_.contains(0)).flatten
   }
 
-  //Seq[String]型である、strSeqが引数として渡されるseqQuestion6メソッドがあります。 strSeqのうち文字列の長さが2以上であるものの末尾に"x”を追加し、それらのみを含むSeqを返すメソッドを、collectを使って作成してください。Seq[String]型である、strSeqが引数として渡されるseqQuestion6メソッドがあります。 strSeqのうち文字列の長さが2以上であるものの末尾に"x”を追加し、それらのみを含むSeqを返すメソッドを、collectを使って作成してください。
+  //Seq[String]型である、strSeqが引数として渡されるseqQuestion6メソッドがあります。 strSeqのうち文字列の長さが2以上であるものの末尾に"x”を追加し、それらのみを含むSeqを返すメソッドを、collectを使って作成してください。
   def prob6(strSeq: Seq[String]) = {
     strSeq.collect{
       case x if(x.size >= 2) => x+"x"
