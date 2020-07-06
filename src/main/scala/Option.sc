@@ -52,3 +52,11 @@ optNumNone match {
   case None    => None
 }
 optNumNone.flatten
+
+for{
+  optInt <- optNumNone
+  x = println(s"optInt: ${optInt}") //Some(2)
+  int    <- optInt
+  y = println(s"int: ${int}")      //2
+} yield int * 2                    //Some(4)
+//yield: 要素を加工してOptionに包んで返してる
