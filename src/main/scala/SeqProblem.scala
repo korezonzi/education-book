@@ -23,6 +23,7 @@ object SeqProblem {
 
   }
 
+  //Seq[Int]型である、numSeqが引数として渡されるseqQuestion1メソッドがあります。numSeqの要素のうち、3の倍数の要素のみ0に変換する関数を実装してください。Seq[Int]型である、numSeqが引数として渡されるseqQuestion1メソッドがあります。numSeqの要素のうち、3の倍数の要素のみ0に変換する関数を実装してください。
   def prob1(numSeq: Seq[Int]) = {
     for{
       x <- numSeq
@@ -32,6 +33,7 @@ object SeqProblem {
     }
   }
 
+  //Seq[Int]型である、numSeqが引数として渡されるseqQuestion2メソッドがあります。 numSeqのうち3の倍数のみを返すメソッドをfilterを使って作成してください。Seq[Int]型である、numSeqが引数として渡されるseqQuestion2メソッドがあります。 numSeqのうち3の倍数のみを返すメソッドをfilterを使って作成してください。
   def prob1Part2(numSeq: Seq[Int]) = {
     numSeq.map(x =>  if( x % 3 == 0) 0 else x)
   }
@@ -40,11 +42,13 @@ object SeqProblem {
     numSeq.filter(_ % 3 == 0)
   }
 
+  //Seq[Seq[Int]]型である、numSeqSeqが引数として渡されるseqQuestion3メソッドがあります。 numSeqSeqのうち3の倍数を含むSeqのみを返すメソッドをfilterとexistsを使って作成してください。
   def prob3(numSeqSeq: Seq[Seq[Int]]) = {
     //val aSSeq = Seq(Seq(1,2,3), Seq(2), Seq(333))
     numSeqSeq.filter(_.exists(_ % 3 == 0))
   }
 
+  //Seq[Int]型である、numSeqが引数として渡されるseqQuestion4メソッドがあります。 numSeqに偶数が含まれていればその最初の値を、含まれていない場合は-1を返すメソッドをfindを使って作成してください。Seq[Int]型である、numSeqが引数として渡されるseqQuestion4メソッドがあります。 numSeqに偶数が含まれていればその最初の値を、含まれていない場合は-1を返すメソッドをfindを使って作成してください。
   def prob4(numSeq: Seq[Int]) = {
     numSeq.find(_ % 2 == 0) match {
       case Some(x) => x
@@ -56,10 +60,12 @@ object SeqProblem {
     numSeq.find(_ % 2 == 0).getOrElse(-1)
   }
 
+  //Seq[Option[Int]]型である、numOptSeqが引数として渡されるseqQuestion5メソッドがあります。 numOptSeqのうち0を含む最初のOption[Int]を返すメソッドをfindとcontainsを使って作成してください。
   def prob5(numOptSeq: Seq[Option[Int]]) = {
     numOptSeq.find(_.contains(0)).flatten
   }
 
+  //Seq[String]型である、strSeqが引数として渡されるseqQuestion6メソッドがあります。 strSeqのうち文字列の長さが2以上であるものの末尾に"x”を追加し、それらのみを含むSeqを返すメソッドを、collectを使って作成してください。Seq[String]型である、strSeqが引数として渡されるseqQuestion6メソッドがあります。 strSeqのうち文字列の長さが2以上であるものの末尾に"x”を追加し、それらのみを含むSeqを返すメソッドを、collectを使って作成してください。
   def prob6(strSeq: Seq[String]) = {
     strSeq.collect{
       case x if(x.size >= 2) => x+"x"
@@ -118,4 +124,35 @@ object SeqProblem {
   def prob15: Int = {
     Seq(3*4, 4*2, 4*1).max
   }
+
+  /*問題1 文字列の配列、strSeqが与えられます。※ seqの定義は以下
+  val strSeq: Seq[String] = Seq("し", "な", "て", "も", "お")
+  foldLeftを使って、"おもてなし"(型はString)という文字列を作成してください。(他に必要なメソッドがあれば、使用しても構わない)*/
+  /*問題2: 数字の配列、intSeqが与えられます。 ※ intSeqは空の可能性もある
+  val intSeq: Seq[Int] = Seq(1,2,3,4) もしくは Seq()
+  reduce もしくは reduceOptionを使って、intSeqの中身を合計する処理を作成してください。(配列が空の場合には、0を返すこと)*/
+
+  /*問題3: 数字の配列、intSeqが与えられます。 ※ intSeqは空の可能性もある
+  val intSeq: Seq[Int] = Seq(1,2,3,4) もしくは Seq()
+  collectを使って、1の場合には"x"を、2の場合には"y"を、それ以外の場合には"z"に変換し配列を返す処理を作成してください。*/
+
+  /*ちょっと発展
+  問題4: 数字の配列、intSeqが与えられます。 ※ intSeqは空の可能性もある
+  val intSeq: Seq[Int] = Seq(1*1, 2*2, 4*4, 3*3) もしくは Seq()
+  reduceOptionを使って、intSeqの最大値を算出する処理を作成してください。(配列が空の場合は、0を返すこと)問題1 文字列の配列、strSeqが与えられます。※ seqの定義は以下
+  val strSeq: Seq[String] = Seq("し", "な", "て", "も", "お")
+  foldLeftを使って、"おもてなし"(型はString)という文字列を作成してください。(他に必要なメソッドがあれば、使用しても構わない)*/
+
+  /*問題2: 数字の配列、intSeqが与えられます。 ※ intSeqは空の可能性もある
+  val intSeq: Seq[Int] = Seq(1,2,3,4) もしくは Seq()
+  reduce もしくは reduceOptionを使って、intSeqの中身を合計する処理を作成してください。(配列が空の場合には、0を返すこと)*/
+
+  /*問題3: 数字の配列、intSeqが与えられます。 ※ intSeqは空の可能性もある
+  val intSeq: Seq[Int] = Seq(1,2,3,4) もしくは Seq()
+  collectを使って、1の場合には"x"を、2の場合には"y"を、それ以外の場合には"z"に変換し配列を返す処理を作成してください。*/
+
+  /*ちょっと発展
+  問題4: 数字の配列、intSeqが与えられます。 ※ intSeqは空の可能性もある
+  val intSeq: Seq[Int] = Seq(1*1, 2*2, 4*4, 3*3) もしくは Seq()
+  reduceOptionを使って、intSeqの最大値を算出する処理を作成してください。(配列が空の場合は、0を返すこと)*/
 }

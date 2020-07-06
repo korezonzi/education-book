@@ -60,3 +60,5 @@ for{
   y = println(s"int: ${int}")      //2
 } yield int * 2                    //Some(4)
 //yield: 要素を加工してOptionに包んで返してる
+
+val addOne = (x: Int) => x + 1
