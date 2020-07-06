@@ -51,3 +51,4 @@ optNumNone match {
   case Some(x) => x
   case None    => None
 }
+optNumNone.flatten
