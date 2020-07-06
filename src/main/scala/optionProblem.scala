@@ -50,4 +50,13 @@ object optionProblem {
     num.flatten.map(_ * 2)
   }
   //Some(None): flattenでNoneになる
+
+  //yield: 要素加工して、Optionで包んで返す
+  def opt04_4(num: Option[Option[Int]]) = {
+    for {
+      optInt <- num
+      int    <- optInt
+    }yield int * 2
+  }
+
 }
