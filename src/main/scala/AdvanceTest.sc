@@ -8,6 +8,15 @@ import scala.util.{Failure, Success}
 //    case None    => convertToString(None).toString()
 //  }
 //}
+
+//回答例
+def convertToString(numOpt: Option[Int])(conv: Option[Int] => String): String = conv(numOpt)
+def question2_1(numOpt: Option[Int]): String = {
+  convertToString(numOpt)(numOpt => numOpt match {
+    case Some(v) => v.toString
+    case None    => "空でした"
+  })
+}
 def question2(numOpt: Option[Int]) = {
   numOpt.map(_.toString).getOrElse("空でした")
 }
