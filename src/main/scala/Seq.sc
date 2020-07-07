@@ -43,6 +43,8 @@ numSeq.collectFirst{
   case x if(x % 2 == 0) => "even"
   case y if(y % 2 == 1) => "odd"
 }
+//Option[Int]にしてもOptionで包まれる訳では無い
+Some(5).collectFirst(_ * 2)
 
 //exists: ある条件があるか
 //contains: 要素があるか
@@ -57,10 +59,19 @@ numSeq.head
 numSeq.last
 numSeq.init
 numSeq.tail
+Seq(1).tail  //List()
 
 numSeq.headOption
 numSeq.lastOption
 numSeq.empty.lastOption
+
+//TODO: 理解必要
+val seq3 = Seq(1,2,3)
+seq3 match {
+  case h +: _  +: _ :+ l => h + l
+  case _ +: _  => 0
+  case Nil => -1
+}
 numSeq :+ 2
 2 +: numSeq
 numSeq ++ numSeq
@@ -80,6 +91,12 @@ xs.foldLeft(0){(sum, x) =>
   sum + x
 }
 sum
+def reverse(numSeq: Seq[Int]) = {
+  numSeq.foldLeft(Seq.empty[Any]){(acc, x) =>
+    x +: acc
+  }
+}
+
 
 xs.foldLeft(0: Int){(acc: Int, n: Int) =>
   println(acc)

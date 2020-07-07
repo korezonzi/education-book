@@ -38,9 +38,9 @@ def question4(nums: Seq[Int]) = {
 //Seq[Option[Int]]型である、numOpsを引数にとりnumOpsの要素がSomeの場合は中の数字を、Noneの場合はリストから外したSeq[Int]を返すquestion5を作成してください
 val numsOpt = Seq(Some(3), Some(5), None)
 numsOpt.flatten
-for{
+for {
   Some(x) <- numsOpt
-}yield x
+} yield x
 
 //6
 val nums = Seq(2,5,1,5)
