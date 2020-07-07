@@ -163,53 +163,22 @@ object SeqProblem {
 
   def prob13(numSeq: Seq[Int]) = {
     if(numSeq.isEmpty) throw new RuntimeException("empty...")
-    else numSeq.reduce{(result, n) =>
-      result + n
+    else numSeq.reduce{(acc, n) =>
+      acc * n
     }
   }
 
   def prob13_2(numSeq: Seq[Int]) = {
-    numSeq.reduce{(result, n) =>
-      result + n
+    numSeq.reduce{(acc, n) =>
+      acc * n
     }
   }
 
   def prob14: Int = {
-    Seq(3*4, 4*2, 4*1).min
+    numSeq.min
   }
 
   def prob15: Int = {
-    Seq(3*4, 4*2, 4*1).max
+    numSeq.max
   }
-
-  /*問題1 文字列の配列、strSeqが与えられます。※ seqの定義は以下
-  val strSeq: Seq[String] = Seq("し", "な", "て", "も", "お")
-  foldLeftを使って、"おもてなし"(型はString)という文字列を作成してください。(他に必要なメソッドがあれば、使用しても構わない)*/
-  /*問題2: 数字の配列、intSeqが与えられます。 ※ intSeqは空の可能性もある
-  val intSeq: Seq[Int] = Seq(1,2,3,4) もしくは Seq()
-  reduce もしくは reduceOptionを使って、intSeqの中身を合計する処理を作成してください。(配列が空の場合には、0を返すこと)*/
-
-  /*問題3: 数字の配列、intSeqが与えられます。 ※ intSeqは空の可能性もある
-  val intSeq: Seq[Int] = Seq(1,2,3,4) もしくは Seq()
-  collectを使って、1の場合には"x"を、2の場合には"y"を、それ以外の場合には"z"に変換し配列を返す処理を作成してください。*/
-
-  /*ちょっと発展
-  問題4: 数字の配列、intSeqが与えられます。 ※ intSeqは空の可能性もある
-  val intSeq: Seq[Int] = Seq(1*1, 2*2, 4*4, 3*3) もしくは Seq()
-  reduceOptionを使って、intSeqの最大値を算出する処理を作成してください。(配列が空の場合は、0を返すこと)問題1 文字列の配列、strSeqが与えられます。※ seqの定義は以下
-  val strSeq: Seq[String] = Seq("し", "な", "て", "も", "お")
-  foldLeftを使って、"おもてなし"(型はString)という文字列を作成してください。(他に必要なメソッドがあれば、使用しても構わない)*/
-
-  /*問題2: 数字の配列、intSeqが与えられます。 ※ intSeqは空の可能性もある
-  val intSeq: Seq[Int] = Seq(1,2,3,4) もしくは Seq()
-  reduce もしくは reduceOptionを使って、intSeqの中身を合計する処理を作成してください。(配列が空の場合には、0を返すこと)*/
-
-  /*問題3: 数字の配列、intSeqが与えられます。 ※ intSeqは空の可能性もある
-  val intSeq: Seq[Int] = Seq(1,2,3,4) もしくは Seq()
-  collectを使って、1の場合には"x"を、2の場合には"y"を、それ以外の場合には"z"に変換し配列を返す処理を作成してください。*/
-
-  /*ちょっと発展
-  問題4: 数字の配列、intSeqが与えられます。 ※ intSeqは空の可能性もある
-  val intSeq: Seq[Int] = Seq(1*1, 2*2, 4*4, 3*3) もしくは Seq()
-  reduceOptionを使って、intSeqの最大値を算出する処理を作成してください。(配列が空の場合は、0を返すこと)*/
 }
