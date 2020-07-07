@@ -9,15 +9,18 @@ object SeqProblem {
     println(prob4(Seq(1,3)))
     println(prob5(Seq(Some(1), Some(0))))
     println(prob5(Seq(Some(1), None)))
-    println("------prob6-------")
+    println("------prob6 start-------")
     println(prob6(Seq("opton", "a", "hoge")))
     println(prob7(numSeq))
+    println(prob7_2(numSeq))
+    println(prob7_3(numSeq))
     println(prob7(numSeq4))
     println(prob8(numSeq))
     println(prob9(numSeq))
+    println(prob9(Seq(1,2)))
     println(prob10(numSeq4))
     println("-----prob11-----")
-    println(prob11(numSeq))
+    println(reverse(numSeq))
     println("12: "+prob12(numSeq))
     //println("13: "+prob13(Seq.empty))
     println("14: "+prob14)
@@ -25,7 +28,7 @@ object SeqProblem {
 
   }
 
-  val numSeq  = Seq(1, 2, 3, 4, 5)
+  val numSeq  = Seq(1, 2, 3, 4, 5, 102)
   val numSeq2 = Seq(2, 5)
   val numSeq3 = Seq(1, 8)
   val numSeq4 = Seq(2, 11, 4)
@@ -80,7 +83,7 @@ object SeqProblem {
   //Seq[String]型である、strSeqが引数として渡されるseqQuestion6メソッドがあります。 strSeqのうち文字列の長さが2以上であるものの末尾に"x”を追加し、それらのみを含むSeqを返すメソッドを、collectを使って作成してください。
   def prob6(strSeq: Seq[String]) = {
     strSeq.collect{
-      case x if(x.size >= 2) => x+"x"
+      case x if(x.size >= 2) => x + "x"
     }
   }
 
@@ -90,6 +93,18 @@ object SeqProblem {
       case _                => 0
     }
   }
+
+  def prob7_2(numSeq: Seq[Int]) = {
+    numSeq.find( _ >= 100).collectFirst(_ * 2).getOrElse(0)
+  }
+
+  def prob7_3(numSeq: Seq[Int]) = {
+    numSeq.collectFirst {
+      case num if(num >= 100) => num * 2
+    }.getOrElse(0)
+  }
+
+
 
   def prob8(numSeq: Seq[Int])= {
     if(numSeq.isEmpty)0
@@ -101,7 +116,15 @@ object SeqProblem {
     }.getOrElse("")
   }
 
+  def prob8_2(numSeq: Seq[Int]) = {
+    for {
+      head <- numSeq.headOption
+      last <- numSeq.lastOption
+    } yield head + last
+  }.getOrElse(0)
+
   def prob9(numSeq: Seq[Int]): Seq[Int] = {
+    //if(numSeq.length < 3) return List(): Seq[Int]
     numSeq.init.tail
   }
 
@@ -113,20 +136,42 @@ object SeqProblem {
     }
   }
 
-  def prob11(numSeq: Seq[Int]) = {
+  //Great
+  //TODO: 理解
+  def prob10_2(numSeq: Seq[Int]) = {
+    numSeq match {
+      case h +: _  +: _ :+ l => h + l
+      case _ +: _            => 0
+      case _                 => -1
+    }
+  }
+
+  def reverse(numSeq: Seq[Any]) = {
     //numSeq.foldLeft(0)((acc, n ) => acc+n)
-    numSeq.foldLeft(Seq.empty[Int])((acc, n) => n +: acc)
+    numSeq.foldLeft(Seq.empty[Any]){(result, elem) =>
+      elem +: result
+    }
   }
 
   def prob12(numSeq: Seq[Int]) = {
-    numSeq.foldLeft(0)((acc, n) => {
-      acc + n
-    })
+    numSeq.foldRight(1) { (num, acc) =>
+      num * acc
+    }
   }
+  //product: 全要素を掛け合わせる
+  //numSeq.product
 
   def prob13(numSeq: Seq[Int]) = {
     if(numSeq.isEmpty) throw new RuntimeException("empty...")
-    else numSeq.reduce((acc, n) => acc + n)
+    else numSeq.reduce{(result, n) =>
+      result + n
+    }
+  }
+
+  def prob13_2(numSeq: Seq[Int]) = {
+    numSeq.reduce{(result, n) =>
+      result + n
+    }
   }
 
   def prob14: Int = {
