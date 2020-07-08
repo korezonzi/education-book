@@ -1,3 +1,5 @@
+import java.time.LocalDate
+
 object SeqProblem {
   def main(args: Array[String]): Unit = {
     println(prob1(numSeq))
@@ -38,6 +40,23 @@ object SeqProblem {
   val numSeq3 = Seq(1, 8)
   val numSeq4 = Seq(2, 11, 4)
   val strSeq: Seq[String] = Seq("し", "な", "て", "も", "お")
+
+
+  // Seq 応用問題
+  case class Score(
+    name:    String,    // 学生の名前
+    english: Int,       // 英語の点数
+    math:    Int,       // 数学の点数
+    science: Int,       // 理科の点数
+    date:    LocalDate  // 受験日
+  )
+
+  // Seq 応用問題
+  val scoreOfAlice   = Score(name = "Alice",   english = 77,  math = 74, science = 26, date = LocalDate.of(2020, 1, 30))
+  val scoreOfBob     = Score(name = "Bob",     english = 100, math = 74, science = 14, date = LocalDate.of(2020, 1, 26))
+  val scoreOfCharlie = Score(name = "Charlie", english = 100, math = 74, science = 99, date = LocalDate.of(2020, 1, 26))
+  val scoreOfDave    = Score(name = "Dave",    english = 50,  math = 81, science = 88, date = LocalDate.of(2020, 1, 30))
+  val scores: Seq[Score] = Seq(scoreOfAlice, scoreOfBob, scoreOfCharlie, scoreOfDave)
 
   //Seq[Int]型である、numSeqが引数として渡されるseqQuestion1メソッドがあります。numSeqの要素のうち、3の倍数の要素のみ0に変換する関数を実装してください。
   def prob1(numSeq: Seq[Int]) = {
@@ -199,6 +218,7 @@ object SeqProblem {
       (str +: acc).mkString("")
     }
   }
+
   def extraProb1_2(strSeq: Seq[String]) = {
     strSeq.foldLeft(Seq.empty[String]) { (acc, str) =>
       str +: acc
@@ -209,9 +229,7 @@ object SeqProblem {
   val intSeq: Seq[Int] = Seq(1,2,3,4) もしくは Seq()
   reduce もしくは reduceOptionを使って、intSeqの中身を合計する処理を作成してください。(配列が空の場合には、0を返すこと)*/
   def extraProb2(intSeq: Seq[Int]) = {
-    if (intSeq.isEmpty) {
-      0
-    }
+    if (intSeq.isEmpty) 0
     else {
       intSeq.reduce { (acc, n) =>
         acc + n
@@ -219,13 +237,17 @@ object SeqProblem {
     }
   }
 
+  def extraProb2_2(intSeq: Seq[Int]) = {
+    intSeq.reduceOption { (acc, num) =>
+      acc + num
+    }.getOrElse(0)
+  }
+
   /*問題3: 数字の配列、intSeqが与えられます。 ※ intSeqは空の可能性もある
   val intSeq: Seq[Int] = Seq(1,2,3,4) もしくは Seq()
   collectを使って、1の場合には"x"を、2の場合には"y"を、それ以外の場合には"z"に変換し配列を返す処理を作成してください。*/
   def extraProb3(intSeq: Seq[Int]) = {
-    if (intSeq.isEmpty) {
-      0
-    }
+    if (intSeq.isEmpty) Seq.empty
     else {
       intSeq.collect {
         case 1 => "x"
@@ -240,14 +262,20 @@ object SeqProblem {
   val intSeq: Seq[Int] = Seq(1*1, 2*2, 4*4, 3*3) もしくは Seq()
   reduceOptionを使って、intSeqの最大値を算出する処理を作成してください。(配列が空の場合は、0を返すこと)*/
   def extraProb4(intSeq: Seq[Int]) = {
-    if (intSeq.isEmpty) {
-      0
-    }
+    if (intSeq.isEmpty) 0
     else {
       intSeq.reduceOption { (acc, n) =>
         if (acc <= n) n
         else acc
       }
-    }
+    }.getOrElse(0)
+  }
+
+  //TODO
+  //抑える
+  def getTotalRanking(scoreSeq: Seq[Score]): Seq[String] = {
+    scoreSeq.sortBy(score =>
+      score.english + score.math + score.science
+    ).reverse.map(_.name)
   }
 }
