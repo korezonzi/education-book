@@ -32,7 +32,7 @@ object SeqProblem {
     println(extraProb2(numSeq))
     println(extraProb3(numSeq))
     println(extraProb4(numSeq))
-
+    println(getTotalRanking(scores))
   }
 
   val numSeq = Seq(1, 2, 3, 4, 5, 102)
