@@ -201,15 +201,14 @@ object AdvanceProblem {
   //ばつ
   //15
   def question15(numsFuture: Seq[Future[Int]]) = {
-    val res = numsFuture.foldLeft(Future.successful(0)) {(acc, n) =>
+    numsFuture.foldLeft(Future.successful(0)) {(acc, n) =>
       for {
         v1 <- acc
         v2 <- n
       }yield  {
-        (v1+v2)
+        v1+v2
       }
     }
-    println(res)
   }
 
 }
