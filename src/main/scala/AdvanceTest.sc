@@ -161,6 +161,58 @@ numsFutu.foldLeft(Future.successful(0)) {(acc, v) =>
     v1 <- acc
     v2 <- v
   }yield {
-    (v1+v2)
+    v1+v2
   }
+}
+
+//16
+case class User(
+  id:   Long,
+  name: String,
+  age:  Int
+)
+case class UserInfo(
+  userId: Long,
+  email: String,
+  phone: String
+)
+
+case class ViewValueUser(
+  userId: String,
+  name:   String,
+  age:    Int,
+  email:  String,
+  phone:  String
+)
+
+val users:Seq[User] = Seq(
+  User(1, "Mike", 20),
+  User(2, "Mai", 29),
+  User(3, "Jack", 30)
+)
+val userInfoSeq = Seq(
+  UserInfo(1, "mike@gmail.com", "090-1234-5678"),
+  UserInfo(2, "Mai@gmail.com", "090-1212-2222"),
+)
+
+for {
+  user <- users
+  userInfo <- userInfoSeq
+} yield (user, userInfo) match {
+  case x if(user.id == userInfo.userId) =>
+    ViewValueUser(
+      x._1.id.toString,
+      x._1.name,
+      x._1.age,
+      x._2.email,
+      x._2.phone
+  )
+  case z if(userInfo.userId != user.id) =>
+    ViewValueUser(
+      z._1.id.toString,
+      z._1.name,
+      z._1.age,
+      "",
+      ""
+    )
 }
