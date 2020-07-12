@@ -66,3 +66,21 @@ val scoreOfCharlie2 = OrderedScore(name = "Charlie", english = 100, math = 74, s
 val scoreOfDave2    = OrderedScore(name = "Dave",    english = 50,  math = 81, science = 88, date = LocalDate.of(2020, 1, 30))
 val scores2: Seq[OrderedScore] = Seq(scoreOfAlice2, scoreOfBob2, scoreOfCharlie2, scoreOfDave2).sorted
 
+//Ordering.by(x, y): x= ソートしたい型, y = 返還後のソート出来る型
+val scienceScoreOrdering: Ordering[Score] = Ordering.by[Score, Int](_.science).reverse
+val dateScoreOrdering = Ordering.fromLessThan[Score]((scoreA, scoreB) => scoreA.date.isBefore(scoreB.date))
+
+val myOrdering: Ordering[Score] = new Ordering[Score] {
+  def compare(x: Score, y: Score): Int = {
+    Ordering.Tuple3(Ordering.Int.reverse, Ordering.Int.reverse, Ordering.Int.reverse).compare (
+      (x.math, x.english, x.science),
+      (y.math, y.english, y.science)
+    )
+  }
+}
+
+//Map(groupByの型, 中身)に変換される
+scores.groupBy(_.date)
+//Mapの値を取り出す時: .keys or.values
+//もちろんmapでも取り出せる
+scores.groupBy(_.date).filter(_._1 == LocalDate.of(2020,1,30)).values
