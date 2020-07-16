@@ -34,5 +34,5 @@ object SeqExtraProblem {
   }
 
   //prob2
-  val nullsLastOptionStringOrdering
+  //val nullsLastOptionStringOrdering
 }
