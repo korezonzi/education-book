@@ -45,4 +45,34 @@ object EitherTry {
       case Failure(exception) => Left(exception.getMessage)
     }
   }
+
+  def prob3_2: Either[String, Int] = {
+    val intTry = Try("100".toInt)
+    intTry.toEither.left.map(_.getMessage)
+  }
+
+  //prob4
+  //fold: Leftと Right の値を変ん関して、値を取り出すことが出来る
+  //Leftの値 'b:B' は'fb: B => C'によって変換される
+  //Rightの値 'a: A' は 'fa:A => C'によって変換される
+  val intTry = Try("100".toInt)
+  val strIntEither = intTry.toEither.left.map(_.getMessage)
+  strIntEither.fold(
+    l => println("ExceptionMessage :" + l),
+    r => println("Success " + r)
+  )
+
+  //prob5
+  //toOption: Failure -> None, Success(v) -> Some(v)
+  val res = Success(1).toOption //Some(1)
+  Try(None.get).toOption  //None
+
+  val userTom = User(UserId(1), "tom")
+  //先にLeftになっていると後続の処理は実行されない
+  /*def updateUser(id: UserId, name: String) = {
+    val result : Either[Error, User] = for{
+      //1. User情報の取得
+      user <- userTom
+    }
+  }*/
 }
