@@ -39,3 +39,19 @@ val resMap = nn.map(x => x match {
 val evenSeq = nn.filter(_ % 2  == 0)
 val addSeq = nn.filter(_ % 2 != 0)
 val resMaps = Seq(1,2,3,4,5).groupBy(_ % 2 ==0)
+
+case class Article(
+    id: Long,   // ID
+    title: String,   // タイトル
+    body: String   // 本文
+)
+
+val articles = Seq(
+    Article(301, "出産祝いでおめでとうを伝えるとき。メールやカードでの伝え方", "友だちの場合やビジネスの場合の文例"),
+    Article(122, "2歳の子どもが激しい人見知りをするとき。固まる理由や対応について", "習い事のときや男性に人見知りをするときの様子"),
+    Article(530, "1歳の幼児食。野菜を食べてほしいときの献立例やレシピとは", "冷凍ストックやレトルトを使って時短に")
+)
+
+val articleMap = articles.groupBy(_.id)
+
+articleMap.get(530)
