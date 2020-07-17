@@ -173,6 +173,14 @@ object SeqProblem {
     }
   }
 
+  def prob10_3(numSeq: Seq[Int]) = {
+    numSeq match {
+      case h +: _ +: _ :+ l => h + l
+      case Nil              => -1
+      case _                => 0
+    }
+  }
+
   def reverse(numSeq: Seq[Any]) = {
     //numSeq.foldLeft(0)((acc, n ) => acc+n)
     numSeq.foldLeft(Seq.empty[Any]) { (result, elem) =>

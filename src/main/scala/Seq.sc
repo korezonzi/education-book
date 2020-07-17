@@ -1,3 +1,15 @@
+
+
+2 :: 2 :: Nil
+
+val numSeq: Seq[Int]  = Seq(1,2,3,100,120,130)
+numSeq.foldLeft(Seq.empty[Int]) { (result, elem) =>
+      elem +: result
+}
+val emptySeq: Seq[Int] = Seq.empty
+numSeq.foldLeft(emptySeq){(result, elem) =>
+  elem +: result
+}
 Seq(1,2,3).map(_ * 2)
 Seq(Seq(1,2,3), Seq(4,5,6)).flatten
 
@@ -21,7 +33,6 @@ for{
   b <- Seq(3,4)
 }yield (a,b)
 
-val numSeq: Seq[Int]  = Seq(1,2,3)
 //find: 値見つけると終了
 //Some(x), None返す
 numSeq.find(_ % 2 == 1)
