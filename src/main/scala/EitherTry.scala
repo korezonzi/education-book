@@ -3,9 +3,9 @@ import scala.util.{Failure, Success, Try}
 object EitherTry {
   def main(args: Array[String]): Unit = {
     println(prob3())
-//    println(LoginApplication.loginRes)
-//    println(LoginApplication.leftType)
-//    println(LoginApplication.rightType)
+    println(LoginApplication.loginRes)
+    //println(LoginApplication.leftType)
+    println(LoginApplication.rightType)
   }
 
   //回答
@@ -18,8 +18,11 @@ object EitherTry {
       ???
     }
     val loginRes = login(UserId(1))
+    println(loginRes)
     val leftType = loginRes.left.map(ExceptionMessage)
+    println(leftType)
     val rightType = loginRes.right.map(_.id)
+    println(rightType)
   }
 
   //prob2

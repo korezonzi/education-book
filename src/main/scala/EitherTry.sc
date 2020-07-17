@@ -60,3 +60,40 @@ result.value.get match {
     throw exception
   }
 }
+
+import EitherTry.UserId
+
+case class User(id: UserId, name: String)
+case class ExceptionMessage(message: String)
+object LoginApplication {
+  def login(id: UserId): Either[String, User] = {
+    // implement
+    //???
+    id match {
+      case id if(id == UserId(1)) =>  Right(User(id, "hoge"))
+      case x => Left(x.toString)
+    }
+  }
+  val loginRes = login(UserId(2))
+  val loginResLeft = loginRes.left
+  val loginResLeftMap = loginResLeft.map(s => ExceptionMessage(s))
+  val loginResLeftMapRight = loginResLeftMap.right
+  val res = loginResLeftMapRight.map(u => u.id)
+}
+LoginApplication.loginRes
+LoginApplication.loginResLeft
+LoginApplication.loginResLeftMap
+LoginApplication.loginResLeftMapRight
+LoginApplication.res
+
+val numsOpt = Seq(Some(2), Some(2),None, Some(9))
+val nums    = Seq(1,2,3,4,5,8)
+val res1 = numsOpt.groupBy(_.getOrElse(100))
+val res2 = nums.groupBy(_ % 2 == 0)
+
+val users = Seq(
+  User(UserId(1), "taro"),
+  User(UserId(2),"lll"),
+  User(UserId(3), "taro")
+)
+users.groupBy(_.name)
