@@ -19,17 +19,28 @@ object EitherTry {
     }
     val loginRes = login(UserId(1))
     println(loginRes)
-    val leftType = loginRes.left.map(ExceptionMessage)
+    val leftType: Either[ExceptionMessage, User] = loginRes.left.map(ExceptionMessage)
     println(leftType)
     val rightType = loginRes.right.map(_.id)
     println(rightType)
   }
+
+  //A： ExceptionMessage
+  //B： UserId
+  //`loginRes.left.map(s => ExceptionMessage(s)).right.map(u => u.id)` は、
+  // `Left[String]` を `Left[ExceptionMessage]` に変換しており、
+  // `Right[User]` を `Right[User.Id]` に変換している。
+
+  //A: `Left(ExceptionMessage)`
+//B: `Right(UserId)`
+
 
   //prob2
   //  200 <-
   //  for はいらない
   //  100
   //yield 20000(=200 * 100)
+
   val eit1: Either[String, Int] = Right(200)
   val eit2: Either[String, Int] = Left("not found")
   val eit3: Either[String, Int] = Right(100)

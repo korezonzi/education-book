@@ -65,6 +65,7 @@ import EitherTry.UserId
 
 case class User(id: UserId, name: String)
 case class ExceptionMessage(message: String)
+val a = ExceptionMessage("error")
 object LoginApplication {
   def login(id: UserId): Either[String, User] = {
     // implement
@@ -97,3 +98,18 @@ val users = Seq(
   User(UserId(3), "taro")
 )
 users.groupBy(_.name)
+
+//LeftやRightの時に反対の処理しようとしたら
+
+val rightNum: Either[String, Int] = Right(1)
+val leftStr: Either[String, Int] = Left("not found")
+rightNum.right.map(_ + 4)
+rightNum.left.map(_ * 2)
+// rightNum.get //例外(NoSuchException)
+
+leftStr.map(x => "map: "+x)
+leftStr.left.map(x => "map: " + x)
+leftStr.right.map(x => "map: " + x)
+
+val numOpt = Some(1)
+numOpt.map(num => num.toString)
