@@ -82,6 +82,13 @@ object futurePra {
       }
     }
   }
+  def futureFutureRes = {
+    future1.flatMap {n =>
+      future2(n).map {m =>
+        future3(m)
+      }
+    }
+  }
 
   def futureResFlatMap = {
     future1.flatMap{n =>
