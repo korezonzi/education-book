@@ -95,7 +95,7 @@ object SeqProblem {
   def prob4(numSeq: Seq[Int]) = {
     numSeq.find(_ % 2 == 0) match {
       case Some(x) => x
-      case None => -1
+      case None    => -1
     }
   }
 
@@ -118,7 +118,7 @@ object SeqProblem {
   def prob7(numSeq: Seq[Int]) = {
     numSeq.filter(_ >= 100) match {
       case x if (x.nonEmpty) => x.collectFirst(_ * 2).getOrElse("")
-      case _ => 0
+      case _                 => 0
     }
   }
 
@@ -157,19 +157,17 @@ object SeqProblem {
 
   def prob10(numSeq: Seq[Int]): Int = {
     numSeq match {
-      case x if (x.size >= 3) => x.head + x.last
+      case x if (x.size >= 3)                => x.head + x.last
       case y if (y.size >= 1 && y.size <= 2) => 0
-      case z if (z.isEmpty) => -1
+      case z if (z.isEmpty)                  => -1
     }
   }
 
-  //Great
-  //TODO: 理解
   def prob10_2(numSeq: Seq[Int]) = {
     numSeq match {
       case h +: _ +: _ :+ l => h + l
-      case _ +: _ => 0
-      case _ => -1
+      case _ +: _           => 0
+      case _                => -1
     }
   }
 
